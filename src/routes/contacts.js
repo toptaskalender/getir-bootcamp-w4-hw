@@ -8,6 +8,7 @@ const {
 }             = require('../validations/contact')
 const {
   getContacts,
+  getContact,
   createContact,
   updateContact,
   deleteContact
@@ -21,6 +22,7 @@ router.route('/')
   )
 
 router.route('/:id')
+  .get(getContact)
   .patch(
     validate('body', updateContactValidation),
     updateContact

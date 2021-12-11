@@ -17,6 +17,23 @@ const getContacts = catchAsync(async (req, res) => {
   })
 })
 
+const getContact = catchAsync(async (req, res, next) => {
+  const { id } = req.params
+
+  const contact = await contactService.findById(id)
+
+  if (!contact) {
+    return next(new AppError('There is no contact with this id.', 400))
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      data: contact
+    }
+  })
+})
+
 const createContact = catchAsync(async (req, res) => {
   const { user, body } = req
 
@@ -62,6 +79,7 @@ const deleteContact = catchAsync(async (req, res, next) => {
 
 module.exports = {
   getContacts,
+  getContact,
   createContact,
   updateContact,
   deleteContact
