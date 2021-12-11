@@ -14,7 +14,9 @@ const updateContactValidation = Joi.object({
     .max(20),
 
   phoneNumber: Joi
-    .number()
+    .string()
+    .length(10)
+    .pattern(/^[0-9]+$/)
 })
 
 module.exports = updateContactValidation

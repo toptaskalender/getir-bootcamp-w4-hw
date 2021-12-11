@@ -1,4 +1,4 @@
-const Joi             = require('joi')
+const Joi = require('joi')
 
 const createContactValidation = Joi.object({
   firstName: Joi
@@ -16,8 +16,10 @@ const createContactValidation = Joi.object({
     .max(20),
 
   phoneNumber: Joi
-    .number()
+    .string()
     .required()
+    .length(10)
+    .pattern(/^[0-9]+$/)
 })
 
 module.exports = createContactValidation
